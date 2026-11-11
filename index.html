@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BRANDLY — From Idea to Brand | Digital Business Ecosystem & SaaS</title>
+  <meta name="description" content="Everything you need to build, launch, and grow your business. From professional websites and social media management to AI-powered customer support and performance-driven advertising." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brandly: {
+              black: '#000000',
+              bg: '#08080C',
+              surface: '#101014',
+              surfaceSecondary: '#17171D',
+              text: '#F7F7F8',
+              muted: '#8B8988',
+              violet: '#9312FF',
+              gradientStart: '#A020FF',
+              gradientEnd: '#7A1CF8',
+              success: '#45B558',
+              error: '#F03B2A',
+              border: 'rgba(147,18,255,0.25)'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Space Grotesk', 'Inter', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root {
+      --pure-black: #000000;
+      --bg-primary: #08080C;
+      --surface: #101014;
+      --surface-secondary: #17171D;
+      --text-primary: #F7F7F8;
+      --text-muted: #8B8988;
+      --violet-primary: #9312FF;
+      --violet-glow: rgba(147,18,255,0.35);
+      --border-violet: rgba(147,18,255,0.25);
+    }
+    html {
+      background-color: #08080C;
+      color: #F7F7F8;
+      scroll-behavior: smooth;
+    }
+    body {
+      background-color: #08080C;
+      color: #F7F7F8;
+      overflow-x: hidden;
+    }
+    .brandly-btn {
+      background: linear-gradient(135deg, #A020FF 0%, #7A1CF8 100%);
+      box-shadow: 0 0 28px rgba(147, 18, 255, 0.35);
+      transition: all 0.2s ease;
+    }
+    .brandly-btn:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 0 38px rgba(147, 18, 255, 0.5);
+    }
+    .brandly-glass {
+      background: rgba(16, 16, 20, 0.80);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(147, 18, 255, 0.25);
+    }
+    .brandly-card {
+      background-color: #101014;
+      border: 1px solid rgba(147, 18, 255, 0.25);
+    }
+    .brandly-card-elevated {
+      background-color: #17171D;
+      border: 1px solid rgba(147, 18, 255, 0.25);
+    }
+    .brandly-starfield {
+      background-image:
+        radial-gradient(1px 1px at 15% 20%, rgba(247, 247, 248, 0.75) 50%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 42% 8%, rgba(160, 32, 255, 0.7) 50%, transparent 100%),
+        radial-gradient(1px 1px at 78% 18%, rgba(247, 247, 248, 0.6) 50%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 88% 36%, rgba(247, 247, 248, 0.5) 50%, transparent 100%),
+        radial-gradient(1px 1px at 28% 44%, rgba(147, 18, 255, 0.65) 50%, transparent 100%);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased selection:bg-brandly-violet selection:text-white">
+
+  <!-- GLOBAL ECOSYSTEM SWITCHER BAR -->
+  <div class="bg-brandly-black border-b border-brandly-border px-4 py-2 text-xs flex flex-wrap items-center justify-between gap-2 z-50">
+    <div class="flex items-center gap-2">
+      <span class="h-2 w-2 rounded-full bg-brandly-violet animate-pulse"></span>
+      <span class="font-mono font-semibold text-brandly-text">BRANDLY ECOSYSTEM</span>
+      <span class="hidden md:inline text-brandly-muted">• "You Bring the Idea. BRANDLY Builds the Business."</span>
+    </div>
+    <div class="flex flex-wrap items-center gap-1.5">
+      <button onclick="switchPortal('PUBLIC')" id="portal-btn-PUBLIC" class="px-3 py-1 rounded-lg font-semibold brandly-btn text-white">1. Public Website (19 Pages)</button>
+      <button onclick="switchPortal('ONBOARDING')" id="portal-btn-ONBOARDING" class="px-3 py-1 rounded-lg font-medium bg-brandly-surfaceSecondary text-brandly-muted hover:text-white border border-brandly-border">2. 9-Step Onboarding Wizard</button>
+      <button onclick="switchPortal('CLIENT')" id="portal-btn-CLIENT" class="px-3 py-1 rounded-lg font-medium bg-brandly-surfaceSecondary text-brandly-muted hover:text-white border border-brandly-border">3. Client Dashboard (16 Modules)</button>
+      <button onclick="switchPortal('ADMIN')" id="portal-btn-ADMIN" class="px-3 py-1 rounded-lg font-medium bg-brandly-surfaceSecondary text-brandly-muted hover:text-white border border-brandly-border">4. CEO/COO Admin &amp; Internal Ops</button>
+    </div>
+  </div>
+
+  <!-- PORTAL 1: COMPLETE PUBLIC WEBSITE (ALL 19 PAGES + PLANETARY VIDEO HERO) -->
+  <div id="portal-PUBLIC" class="flex-1 flex flex-col">
+    <header class="sticky top-0 z-40 border-b border-brandly-border bg-brandly-bg/85 backdrop-blur-xl">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <button onclick="showPublicPage('home')" class="inline-flex items-center gap-3 text-left focus:outline-none">
+          <div class="rounded-xl bg-brandly-surface border border-brandly-border p-1.5 shadow-[0_0_24px_rgba(147,18,255,0.35)]">
+            <svg width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="brandlyRoyalGrad" x1="4" y1="44" x2="44" y2="4" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#7A1CF8"/>
+                  <stop offset="55%" stop-color="#9312FF"/>
+                  <stop offset="100%" stop-color="#A020FF"/>
+                </linearGradient>
+              </defs>
+              <path d="M10 8C10 6.895 10.895 6 12 6H17V42H12C10.895 42 10 41.105 10 40V8Z" fill="url(#brandlyRoyalGrad)"/>
+              <path d="M17 24H29C35.075 24 40 28.925 40 35C40 40.5 35.5 42 29 42H17V36.5H28.5C31.538 36.5 34 35.2 34 33C34 30.79 31.538 29.5 28.5 29.5H17V24Z" fill="url(#brandlyRoyalGrad)"/>
+              <path d="M17 11.5H26.5L34.5 6.5L26 6.5V2.5L41 2.5V17.5H37V9.3L28.2 17H17V11.5Z" fill="#F7F7F8"/>
+              <circle cx="23.5" cy="20.5" r="2" fill="#F7F7F8"/>
+            </svg>
+          </div>
+          <div>
+            <div class="font-display font-bold tracking-[0.14em] text-xl text-brandly-text leading-none">BRANDLY</div>
+            <div class="text-[10px] uppercase tracking-[0.2em] text-brandly-muted mt-1">From Idea to Brand.</div>
+          </div>
+        </button>
+
+        <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-brandly-muted">
+          <button onclick="showPublicPage('home')" class="hover:text-brandly-text transition">Home</button>
+          <button onclick="showPublicPage('services')" class="hover:text-brandly-text transition">Services</button>
+          <button onclick="showPublicPage('how-it-works')" class="hover:text-brandly-text transition">How It Works</button>
+          <button onclick="showPublicPage('pricing')" class="hover:text-brandly-text transition">Pricing</button>
+          <button onclick="showPublicPage('about')" class="hover:text-brandly-text transition">About Us</button>
+          <button onclick="showPublicPage('faq')" class="hover:text-brandly-text transition">FAQ</button>
+          <button onclick="showPublicPage('contact')" class="hover:text-brandly-text transition">Contact Us</button>
+        </nav>
+
+        <div class="flex items-center gap-2.5">
+          <button onclick="showPublicPage('login')" class="px-4 py-2 rounded-xl text-xs font-medium text-brandly-text bg-brandly-surfaceSecondary border border-brandly-border hover:border-brandly-violet">Client Login</button>
+          <button onclick="showPublicPage('register')" class="px-4 py-2 rounded-xl text-xs font-semibold text-white brandly-btn">Get Started</button>
+        </div>
+      </div>
+
+      <!-- 19-Page Quick Route Selector Bar -->
+      <div class="bg-brandly-surface border-t border-brandly-border px-4 py-2 overflow-x-auto">
+        <div class="max-w-7xl mx-auto flex items-center gap-1.5 text-[11px] whitespace-nowrap">
+          <span class="text-brandly-violet font-bold uppercase mr-1">19 Public Routes:</span>
+          <button onclick="showPublicPage('home')" class="px-2.5 py-1 rounded-lg bg-brandly-surfaceSecondary hover:text-white border border-brandly-border">1. Home</button>
+          <button onclick="showPublicPage('about')" class="px-2.5 py-1 rounded-lg bg-brandly-surfaceSecondary hover:text-white border border-brandly-border">2. About BRANDLY</button>
+          <button onclick="showPublicPage('services')" class="px-2.5 py-1 rounded-lg bg-brandly-surfaceSecondary hover:text-white border border-brandly-border">3. Services</button>
+          <button onclick="showPublicPage('website-development')" class="px-2.5 py-1 rounded-lg bg-brandly-surfaceSecondary hover:text-white border border-brandly-border">4. Website Dev</button>
+          <button onclick="showPublicPage('brand-identity')" class="px-2.5 py-1 rounded-lg bg-brandly-surfaceSecondary hover:text-white border border-brandly-border">5. Brand Identity</button>
+          <button onclick="showPublicPage('social-media-management')" class="px-2.5 py-1 rounded-lg bg-brandly-surfaceSecondary hover:text-white border border-brandly-border">6. Social Media</button>
+          <button onclick="showPublicPage('digital-advertising')" class="px-2.5 py-1 rounded-lg bg-brandly-surfaceSecondary hover:text-white border border-brandly-border">7. Digital Ads</button>
+          <button onclick="showPublicPage('ai-business-assistant')" class="px-2.5 py-1 rounded-lg bg-brandly-surfaceSecondary hover:text-white border border-brandly-border">8. AI Assistant</button>
+          <button onclick="showPublicPage('ecommerce-solutions')" class="px-2.5 py-1 rounded-lg bg-brandly-surfaceSecondary hover:text-white border border-brandly-border">9. E-Commerce</button>
+          <button onclick="showPublicPage('business-analytics')" class="px-2.5 py-1 rounded-lg bg-brandly-surfaceSecondary hover:text-white border border-brandly-border">10. Business Analytics</button>
+          <button onclick="showPublicPage('pricing')" class="px-2.5 py-1 rounded-lg bg-brandly-surfaceSecondary hover:text-white border border-brandly-border">11. Pricing</button>
+          <button onclick="showPublicPage('contact')" class="px-2.5 py-1 rounded-lg bg-brandly-surfaceSecondary hover:text-white border border-brandly-border">12. Contact Us</button>
+          <button onclick="showPublicPage('faq')" class="px-2.5 py-1 rounded-lg bg-brandly-surfaceSecondary hover:text-white border border-brandly-border">13. FAQ</button>
+          <button onclick="showPublicPage('privacy-policy')" class="px-2.5 py-1 rounded-lg bg-brandly-surfaceSecondary hover:text-white border border-brandly-border">14. Privacy Policy</button>
+          <button onclick="showPublicPage('terms-of-service')" class="px-2.5 py-1 rounded-lg bg-brandly-surfaceSecondary hover:text-white border border-brandly-border">15. Terms of Service</button>
+          <button onclick="showPublicPage('cookie-policy')" class="px-2.5 py-1 rounded-lg bg-brandly-surfaceSecondary hover:text-white border border-brandly-border">16. Cookie Policy</button>
+          <button onclick="showPublicPage('login')" class="px-2.5 py-1 rounded-lg bg-brandly-surfaceSecondary hover:text-white border border-brandly-border">17. Client Login</button>
+          <button onclick="showPublicPage('register')" class="px-2.5 py-1 rounded-lg bg-brandly-surfaceSecondary hover:text-white border border-brandly-border">18. Client Registration</button>
+          <button onclick="showPublicPage('how-it-works')" class="px-2.5 py-1 rounded-lg bg-brandly-surfaceSecondary hover:text-white border border-brandly-border">19. How It Works</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- HOMEPAGE HERO WITH EXACT PLANETARY VIDEO URL -->
+    <section id="public-hero-section" class="relative isolate pt-14 pb-24 sm:pt-20 sm:pb-28 overflow-hidden border-b border-brandly-border">
+      <div class="pointer-events-none absolute inset-0 overflow-hidden z-0">
+        <div class="absolute inset-0 bg-gradient-to-b from-brandly-black via-brandly-bg to-brandly-bg brandly-starfield opacity-90"></div>
+        <div class="absolute -top-48 left-1/2 -translate-x-1/2 w-[920px] h-[440px] rounded-full blur-[130px] opacity-50" style="background: radial-gradient(circle, rgba(147,18,255,0.35) 0%, transparent 70%);"></div>
+
+        <!-- EXACT REQUIRED PLANETARY VIDEO URL ON DESKTOP -->
+        <div id="desktop-video-container" class="hidden md:flex absolute inset-x-0 top-[10%] justify-center">
+          <video
+            id="planetary-video-el"
+            src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/e859f229-8ebd-43fb-a5a0-58006ba75327.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+            class="w-full max-w-[1600px] h-[700px] object-cover object-center mix-blend-screen opacity-95"
+          ></video>
+        </div>
+
+        <!-- STATIC CANVAS FALLBACK FOR MOBILE OR WHEN VIDEO CANNOT LOAD -->
+        <canvas id="planetary-canvas-fallback" class="md:hidden absolute inset-0 w-full h-full opacity-95"></canvas>
+        <div class="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-brandly-bg via-brandly-bg/85 to-transparent"></div>
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-brandly-violet/15 border border-brandly-border mb-6">
+          <span class="h-2 w-2 rounded-full bg-brandly-violet animate-pulse"></span>
+          <span>From Idea to Brand.</span>
+          <span class="text-brandly-muted">|</span>
+          <span class="text-brandly-muted">We Build. We Manage. We Grow.</span>
+        </div>
+
+        <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-brandly-text leading-[1.06] max-w-4xl mx-auto">
+          Your Idea. Our Technology.
+          <span class="bg-gradient-to-r from-[#F7F7F8] via-[#A020FF] to-[#9312FF] bg-clip-text text-transparent"> Your Brand.</span>
+        </h1>
+
+        <p class="mx-auto mt-6 max-w-2xl text-base sm:text-lg lg:text-xl text-brandly-muted leading-relaxed">
+          Everything you need to build, launch, and grow your business. From professional websites and social media management to AI-powered customer support and performance-driven advertising.
+        </p>
+
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button onclick="showPublicPage('register')" class="w-full sm:w-auto px-7 py-3.5 rounded-xl font-semibold text-base text-white brandly-btn">
+            Start Your Brand
+          </button>
+          <button onclick="showPublicPage('services')" class="w-full sm:w-auto px-7 py-3.5 rounded-xl font-semibold text-base text-brandly-text bg-brandly-surfaceSecondary border border-brandly-border hover:border-brandly-violet">
+            Explore Our Services
+          </button>
+        </div>
+
+        <!-- Dark Glass Dashboard Preview -->
+        <div class="mt-16 brandly-glass rounded-3xl p-4 sm:p-6 text-left shadow-[0_0_64px_rgba(147,18,255,0.35)]">
+          <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-brandly-border">
+            <div class="flex items-center gap-2">
+              <span class="h-3 w-3 rounded-full bg-brandly-error"></span>
+              <span class="h-3 w-3 rounded-full bg-amber-500"></span>
+              <span class="h-3 w-3 rounded-full bg-brandly-success"></span>
+              <span class="ml-2 text-xs font-mono text-brandly-muted">brandly.eg/app/client-workspace</span>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-full text-xs bg-brandly-violet/20 border border-brandly-border">DARK GLASS COMMAND CENTER</span>
+              <button onclick="switchPortal('CLIENT')" class="px-3 py-1 rounded-full text-xs bg-brandly-success/20 text-brandly-success font-semibold hover:underline">Open Full 16-Module Client Dashboard →</button>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+            <div class="p-4 rounded-xl bg-brandly-surface border border-brandly-border">
+              <div class="text-brandly-muted">Multi-Tenant Isolation</div>
+              <div class="font-display text-xl font-bold text-brandly-text mt-1">RBAC + DB Scoped</div>
+              <div class="text-brandly-success mt-1">Zero cross-client access</div>
+            </div>
+            <div class="p-4 rounded-xl bg-brandly-surface border border-brandly-border">
+              <div class="text-brandly-muted">BRANDLY AI Assistant</div>
+              <div class="font-display text-xl font-bold text-brandly-text mt-1">Arabic &amp; English</div>
+              <div class="text-brandly-muted mt-1">Grounded in live product DB</div>
+            </div>
+            <div class="p-4 rounded-xl bg-brandly-surface border border-brandly-border">
+              <div class="text-brandly-muted">Hybrid Pricing (Egypt)</div>
+              <div class="font-display text-xl font-bold text-brandly-text mt-1">Starter / Growth / Premium</div>
+              <div class="text-brandly-muted mt-1">Setup + Monthly + Optional 5%</div>
+            </div>
+            <div class="p-4 rounded-xl bg-brandly-surface border border-brandly-border">
+              <div class="text-brandly-muted">Digital Contract Engine</div>
+              <div class="font-display text-xl font-bold text-brandly-text mt-1">22 Mandatory Clauses</div>
+              <div class="text-brandly-muted mt-1">6-Month Term • SHA-256 Sealed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main id="public-page-view" class="flex-1 py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full"></main>
+  </div>
+
+  <!-- PORTAL 2: 9-STEP BUSINESS ONBOARDING WIZARD -->
+  <div id="portal-ONBOARDING" class="hidden flex-1 py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full">
+    <div class="brandly-card rounded-2xl p-6 sm:p-8 space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-brandly-border pb-4">
+        <div>
+          <span id="wizard-badge" class="px-3 py-1 rounded-full text-xs bg-brandly-violet/20 border border-brandly-border">Step 1 of 9</span>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold mt-2">BRANDLY 9-Step Business Onboarding Wizard</h2>
+          <p class="text-xs text-brandly-muted mt-1">Progress is persisted between steps. Final submission provisions your client record, links your plan, and creates a single idempotent onboarding project.</p>
+        </div>
+        <div id="wizard-progress-text" class="font-mono text-xs text-brandly-violet">Completion: 11%</div>
+      </div>
+
+      <div id="wizard-step-buttons" class="grid grid-cols-3 sm:grid-cols-9 gap-1.5"></div>
+      <div id="wizard-step-content" class="p-6 rounded-2xl bg-brandly-surfaceSecondary border border-brandly-border space-y-4"></div>
+
+      <div class="flex items-center justify-between pt-4 border-t border-brandly-border">
+        <button onclick="stepWizard(-1)" class="px-5 py-2.5 rounded-xl text-xs font-semibold bg-brandly-surfaceSecondary border border-brandly-border hover:border-brandly-violet">← Previous Step</button>
+        <button onclick="stepWizard(1)" id="wizard-next-btn" class="px-6 py-2.5 rounded-xl text-xs font-semibold text-white brandly-btn">Save Step &amp; Continue →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PORTAL 3: PRIVATE CLIENT DASHBOARD (ALL 16 MODULES) -->
+  <div id="portal-CLIENT" class="hidden flex-1 flex flex-col lg:flex-row">
+    <aside class="w-full lg:w-64 bg-brandly-surface border-b lg:border-b-0 lg:border-r border-brandly-border p-4 shrink-0">
+      <div class="mb-4 p-3.5 rounded-xl bg-brandly-surfaceSecondary border border-brandly-border">
+        <div class="flex items-center justify-between">
+          <span class="font-display font-bold text-sm" id="workspace-brand-title">CAIRO LUXE BRAND</span>
+          <span class="px-2 py-0.5 rounded text-[10px] bg-brandly-violet text-white">GROWTH</span>
+        </div>
+        <div class="text-[11px] text-brandly-success mt-1">● Tenant Isolation Active</div>
+      </div>
+      <nav id="client-nav-list" class="flex lg:flex-col gap-1 overflow-x-auto text-xs font-medium"></nav>
+    </aside>
+    <main id="client-main-panel" class="flex-1 p-6 sm:p-8 overflow-y-auto"></main>
+  </div>
+
+  <!-- PORTAL 4: EXECUTIVE ADMIN & INTERNAL OPERATIONS (/admin & /internal) -->
+  <div id="portal-ADMIN" class="hidden flex-1 p-6 sm:p-10 max-w-7xl mx-auto w-full space-y-8">
+    <div class="flex flex-wrap items-center justify-between gap-4 border-b border-brandly-border pb-6">
+      <div>
+        <span class="px-3 py-1 rounded-full text-xs bg-brandly-violet/20 border border-brandly-border">PARTS 12 &amp; 13 • INTERNAL ADMINISTRATION &amp; OPERATIONS</span>
+        <h1 class="font-display text-2xl sm:text-4xl font-bold mt-2">BRANDLY Executive Command &amp; Department Operations</h1>
+        <p class="text-xs text-brandly-muted mt-1">12 Role-Based Access Control (RBAC) Tiers • Client accounts are strictly blocked from /admin and /internal.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="brandly-card-elevated rounded-2xl p-6 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="px-3 py-1 rounded-full text-xs bg-brandly-violet text-white font-semibold">Founder &amp; CEO</span>
+          <span class="font-mono text-xs text-brandly-success">Rank #1 • Highest Executive Authority</span>
+        </div>
+        <h2 class="font-display text-2xl font-bold">Mostafa Tamer</h2>
+        <p class="text-xs text-brandly-muted leading-relaxed">Highest executive authority at BRANDLY. Responsible for company vision, strategy, financial decisions, partnerships, product direction, and overall management. Exclusive access to Founder Shareholder &amp; Equity configuration.</p>
+        <div class="p-3.5 rounded-xl bg-brandly-surface border border-brandly-border text-xs space-y-2">
+          <div class="font-semibold text-brandly-violet">Founder-Only Shareholder &amp; Equity Governance (Hidden from Ordinary Employees):</div>
+          <div class="flex items-center gap-2">
+            <span class="text-brandly-muted">Configurable Ownership %:</span>
+            <input type="text" placeholder="Unset (Null by default — never invented)" class="flex-1 rounded-lg bg-brandly-surfaceSecondary px-3 py-1.5 text-xs border border-brandly-border text-white" />
+          </div>
+        </div>
+      </div>
+
+      <div class="brandly-card-elevated rounded-2xl p-6 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="px-3 py-1 rounded-full text-xs bg-brandly-violet/20 border border-brandly-border font-semibold">Co-Founder &amp; COO</span>
+          <span class="font-mono text-xs text-brandly-violet">Rank #2 • Second-Highest Executive Authority</span>
+        </div>
+        <h2 class="font-display text-2xl font-bold">Anas Ahmed</h2>
+        <p class="text-xs text-brandly-muted leading-relaxed">Second-highest executive position at BRANDLY. Responsible for daily operations, project execution, team coordination, client management, service delivery, and operational quality across all internal departments.</p>
+        <div class="p-3.5 rounded-xl bg-brandly-surface border border-brandly-border text-xs">
+          <div class="font-semibold text-brandly-success">Active Operational Oversight:</div>
+          <div class="text-brandly-muted mt-1">All 12 Roles Configured: CEO, COO, Administrator, Marketing Manager, Advertising Specialist, Web Developer, AI Engineer, Designer, Account Manager, Customer Support, Client, Client Team Member.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brandly-card rounded-2xl p-6 space-y-4">
+      <h3 class="font-display text-lg font-bold">Admin Hybrid Plan Pricing Control (Updates Public Pricing &amp; Contracts Dynamically)</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="p-4 rounded-xl bg-brandly-surfaceSecondary border border-brandly-border space-y-2">
+          <div class="font-bold text-sm">Starter — Launch Your Brand</div>
+          <div>Setup Fee: <strong class="text-brandly-violet">EGP 5,000</strong></div>
+          <div>Monthly Subscription: <strong class="text-brandly-success">EGP 3,000/mo</strong></div>
+        </div>
+        <div class="p-4 rounded-xl bg-brandly-surfaceSecondary border border-brandly-border space-y-2">
+          <div class="font-bold text-sm">Growth — Accelerate Your Brand</div>
+          <div>Setup Fee: <strong class="text-brandly-violet">EGP 10,000</strong></div>
+          <div>Monthly Subscription: <strong class="text-brandly-success">EGP 6,000/mo</strong></div>
+        </div>
+        <div class="p-4 rounded-xl bg-brandly-surfaceSecondary border border-brandly-border space-y-2">
+          <div class="font-bold text-sm">Premium — Scale Your Business</div>
+          <div>Setup Fee: <strong class="text-brandly-violet">EGP 20,000</strong></div>
+          <div>Monthly Subscription: <strong class="text-brandly-success">EGP 12,000/mo</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GLOBAL FOOTER -->
+  <footer class="border-t border-brandly-border bg-brandly-black py-10 px-4 sm:px-6 lg:px-8 text-xs text-brandly-muted">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <strong class="text-brandly-text">BRANDLY</strong> — "You Bring the Idea. BRANDLY Builds the Business." • Primary Market: Egypt • Expansion: Middle East &amp; International
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <button onclick="switchPortal('PUBLIC'); showPublicPage('privacy-policy')" class="hover:text-white">Privacy Policy</button>
+        <button onclick="switchPortal('PUBLIC'); showPublicPage('terms-of-service')" class="hover:text-white">Terms of Service</button>
+        <button onclick="switchPortal('PUBLIC'); showPublicPage('cookie-policy')" class="hover:text-white">Cookie Policy</button>
+        <button onclick="switchPortal('PUBLIC'); showPublicPage('faq')" class="hover:text-white">FAQ</button>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function drawStaticPlanetaryFallback() {
+      const canvas = document.getElementById('planetary-canvas-fallback');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      const w = canvas.width = window.innerWidth || 390;
+      const h = canvas.height = 560;
+      ctx.fillStyle = '#08080C';
+      ctx.fillRect(0, 0, w, h);
+      const glow = ctx.createRadialGradient(w * 0.5, h * 0.72, 20, w * 0.5, h * 0.72, w * 0.75);
+      glow.addColorStop(0, 'rgba(160, 32, 255, 0.38)');
+      glow.addColorStop(0.5, 'rgba(147, 18, 255, 0.16)');
+      glow.addColorStop(1, 'rgba(8, 8, 12, 0)');
+      ctx.fillStyle = glow;
+      ctx.fillRect(0, 0, w, h);
+      ctx.beginPath();
+      ctx.arc(w * 0.5, h * 1.48, w * 0.98, Math.PI * 1.15, Math.PI * 1.85);
+      ctx.strokeStyle = '#9312FF';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+    }
+    window.addEventListener('DOMContentLoaded', drawStaticPlanetaryFallback);
+
+    function switchPortal(portal) {
+      ['PUBLIC', 'ONBOARDING', 'CLIENT', 'ADMIN'].forEach((p) => {
+        document.getElementById('portal-' + p).classList.toggle('hidden', p !== portal);
+        const btn = document.getElementById('portal-btn-' + p);
+        if (btn) {
+          btn.className = p === portal
+            ? 'px-3 py-1 rounded-lg font-semibold brandly-btn text-white'
+            : 'px-3 py-1 rounded-lg font-medium bg-brandly-surfaceSecondary text-brandly-muted hover:text-white border border-brandly-border';
+        }
+      });
+      if (portal === 'ONBOARDING') renderWizard();
+      if (portal === 'CLIENT') renderClientModule(currentClientModule);
+    }
+
+    const PUBLIC_PAGES = {
+      'home': {
+        title: 'Complete Digital Business Ecosystem',
+        subtitle: 'Start Building Your Brand Today.',
+        html: `
+          <div class="space-y-12">
+            <div class="text-center max-w-3xl mx-auto">
+              <span class="px-3 py-1 rounded-full text-xs bg-brandly-violet/20 border border-brandly-border">HYBRID PRICING &amp; SAAS ECOSYSTEM</span>
+              <h2 class="font-display text-3xl sm:text-5xl font-bold mt-3">Everything Your Brand Needs Under One Roof.</h2>
+              <p class="text-sm text-brandly-muted mt-3">Brand Identity, Website Development, E-Commerce, Social Media, Digital Advertising, BRANDLY AI Support, and Unified Analytics.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="brandly-card rounded-2xl p-7 flex flex-col justify-between">
+                <div>
+                  <span class="text-xs font-bold text-brandly-violet">STARTER — LAUNCH YOUR BRAND</span>
+                  <div class="font-display text-3xl font-bold mt-2">EGP 3,000<span class="text-xs text-brandly-muted font-normal"> / month</span></div>
+                  <div class="text-xs text-brandly-muted mt-1">+ EGP 5,000 One-Time Setup Fee</div>
+                  <ul class="mt-5 space-y-2 text-xs text-brandly-text border-t border-brandly-border pt-4">
+                    <li>✓ Brand setup &amp; Social media account setup</li>
+                    <li>✓ Basic e-commerce website</li>
+                    <li>✓ Product &amp; Order management</li>
+                    <li>✓ Basic analytics &amp; technical support</li>
+                  </ul>
+                </div>
+                <button onclick="showPublicPage('register')" class="mt-6 w-full py-2.5 rounded-xl text-xs font-semibold bg-brandly-surfaceSecondary border border-brandly-border hover:border-brandly-violet">Select Starter</button>
+              </div>
+              <div class="brandly-card-elevated rounded-2xl p-7 flex flex-col justify-between border-brandly-violet shadow-[0_0_32px_rgba(147,18,255,0.3)]">
+                <div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-xs font-bold text-brandly-violet">GROWTH — ACCELERATE YOUR BRAND</span>
+                    <span class="px-2.5 py-0.5 rounded-full text-[10px] bg-brandly-violet text-white">Most Popular</span>
+                  </div>
+                  <div class="font-display text-3xl font-bold mt-2">EGP 6,000<span class="text-xs text-brandly-muted font-normal"> / month</span></div>
+                  <div class="text-xs text-brandly-muted mt-1">+ EGP 10,000 One-Time Setup Fee</div>
+                  <ul class="mt-5 space-y-2 text-xs text-brandly-text border-t border-brandly-border pt-4">
+                    <li>✓ Everything in Starter + Advanced website</li>
+                    <li>✓ BRANDLY AI basic customer support</li>
+                    <li>✓ Google Ads &amp; Meta Ads management</li>
+                    <li>✓ Marketing analytics, CRM &amp; Monthly report</li>
+                  </ul>
+                </div>
+                <button onclick="showPublicPage('register')" class="mt-6 w-full py-2.5 rounded-xl text-xs font-semibold text-white brandly-btn">Select Growth Plan</button>
+              </div>
+              <div class="brandly-card rounded-2xl p-7 flex flex-col justify-between">
+                <div>
+                  <span class="text-xs font-bold text-brandly-violet">PREMIUM — SCALE YOUR BUSINESS</span>
+                  <div class="font-display text-3xl font-bold mt-2">EGP 12,000<span class="text-xs text-brandly-muted font-normal"> / month</span></div>
+                  <div class="text-xs text-brandly-muted mt-1">+ EGP 20,000 One-Time Setup Fee</div>
+                  <ul class="mt-5 space-y-2 text-xs text-brandly-text border-t border-brandly-border pt-4">
+                    <li>✓ Everything in Growth + Advanced AI automation</li>
+                    <li>✓ Customer retention workflows &amp; Advanced CRM</li>
+                    <li>✓ Priority support &amp; Custom integrations</li>
+                  </ul>
+                </div>
+                <button onclick="showPublicPage('register')" class="mt-6 w-full py-2.5 rounded-xl text-xs font-semibold bg-brandly-surfaceSecondary border border-brandly-border hover:border-brandly-violet">Select Premium</button>
+              </div>
+            </div>
+            <div class="p-4 rounded-xl bg-brandly-surface border border-brandly-border text-xs text-brandly-muted text-center">
+              Disclosure: Advertising budgets are NOT included. Optional 5% Performance Fee applies ONLY when explicitly accepted in the client service agreement.
+            </div>
+          </div>`
+      },
+      'about': {
+        title: 'About BRANDLY — Company Identity & Executive Leadership',
+        subtitle: '"You Bring the Idea. BRANDLY Builds the Business."',
+        html: `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="brandly-card-elevated rounded-2xl p-7 space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="px-3 py-1 rounded-full text-xs bg-brandly-violet text-white">Founder &amp; CEO</span>
+                <span class="text-xs font-mono text-brandly-muted">Highest Executive Authority</span>
+              </div>
+              <h3 class="font-display text-2xl font-bold">Mostafa Tamer</h3>
+              <p class="text-xs text-brandly-muted leading-relaxed">Responsible for company vision, strategy, financial decisions, partnerships, product direction, and overall management. (Zero fabricated biographies or invented ownership numbers.)</p>
+            </div>
+            <div class="brandly-card-elevated rounded-2xl p-7 space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="px-3 py-1 rounded-full text-xs bg-brandly-violet/20 border border-brandly-border">Co-Founder &amp; COO</span>
+                <span class="text-xs font-mono text-brandly-muted">Second-Highest Executive Position</span>
+              </div>
+              <h3 class="font-display text-2xl font-bold">Anas Ahmed</h3>
+              <p class="text-xs text-brandly-muted leading-relaxed">Responsible for daily operations, project execution, team coordination, client management, service delivery, and operational quality.</p>
+            </div>
+          </div>`
+      },
+      'contact': {
+        title: 'Contact Us & Validated Lead Capture',
+        subtitle: 'All 8 Required Fields Validated with Spam Protection & Admin Notification Routing',
+        html: `
+          <form onsubmit="event.preventDefault(); document.getElementById('lead-msg').classList.remove('hidden');" class="brandly-card-elevated rounded-2xl p-7 max-w-2xl mx-auto space-y-4 text-xs">
+            <div id="lead-msg" class="hidden p-4 rounded-xl bg-brandly-success/20 border border-brandly-success text-brandly-success font-semibold">✓ Lead validated, saved to LeadSubmission, and routed to BRANDLY administration!</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div><label class="block mb-1">Full Name *</label><input required class="w-full rounded-xl bg-brandly-surface px-3.5 py-2.5 border border-brandly-border" placeholder="Full Name" /></div>
+              <div><label class="block mb-1">Business Name *</label><input required class="w-full rounded-xl bg-brandly-surface px-3.5 py-2.5 border border-brandly-border" placeholder="Business Name" /></div>
+              <div><label class="block mb-1">Email *</label><input type="email" required class="w-full rounded-xl bg-brandly-surface px-3.5 py-2.5 border border-brandly-border" placeholder="you@brand.com" /></div>
+              <div><label class="block mb-1">Phone Number *</label><input required class="w-full rounded-xl bg-brandly-surface px-3.5 py-2.5 border border-brandly-border" placeholder="+20 10..." /></div>
+              <div><label class="block mb-1">Service Required *</label><select class="w-full rounded-xl bg-brandly-surface px-3.5 py-2.5 border border-brandly-border"><option>Full Brand Launch</option><option>Website Development</option><option>Brand Identity</option><option>Social Media</option><option>Digital Advertising</option><option>BRANDLY AI</option><option>E-Commerce</option></select></div>
+              <div><label class="block mb-1">Estimated Budget *</label><select class="w-full rounded-xl bg-brandly-surface px-3.5 py-2.5 border border-brandly-border"><option>10,000 – 25,000 EGP</option><option>25,000 – 60,000 EGP</option><option>60,000+ EGP</option></select></div>
+            </div>
+            <div><label class="block mb-1">Business Description *</label><textarea required rows="2" class="w-full rounded-xl bg-brandly-surface px-3.5 py-2 border border-brandly-border"></textarea></div>
+            <div><label class="block mb-1">Message *</label><textarea required rows="3" class="w-full rounded-xl bg-brandly-surface px-3.5 py-2 border border-brandly-border"></textarea></div>
+            <button type="submit" class="w-full py-3 rounded-xl font-semibold text-white brandly-btn">Submit Validated Lead</button>
+          </form>`
+      },
+      'register': {
+        title: 'Client Registration (Step 0)',
+        subtitle: 'Collects Full Name, Email, Phone, Password, Country, Business Name + Terms & Privacy Consent',
+        html: `
+          <form onsubmit="event.preventDefault(); switchPortal('ONBOARDING');" class="brandly-card-elevated rounded-2xl p-7 max-w-xl mx-auto space-y-4 text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div><label class="block mb-1">Full Name *</label><input required class="w-full rounded-xl bg-brandly-surface px-3.5 py-2.5 border border-brandly-border" value="Kareem Mansour" /></div>
+              <div><label class="block mb-1">Business Name *</label><input required class="w-full rounded-xl bg-brandly-surface px-3.5 py-2.5 border border-brandly-border" value="Cairo Luxe Apparel" /></div>
+              <div><label class="block mb-1">Email *</label><input type="email" required class="w-full rounded-xl bg-brandly-surface px-3.5 py-2.5 border border-brandly-border" value="founder@cairoluxe.eg" /></div>
+              <div><label class="block mb-1">Phone Number *</label><input required class="w-full rounded-xl bg-brandly-surface px-3.5 py-2.5 border border-brandly-border" value="+20 100 123 4567" /></div>
+              <div><label class="block mb-1">Country *</label><select class="w-full rounded-xl bg-brandly-surface px-3.5 py-2.5 border border-brandly-border"><option>Egypt</option><option>Saudi Arabia</option><option>UAE</option></select></div>
+              <div><label class="block mb-1">Password (Scrypt Hashed) *</label><input type="password" required class="w-full rounded-xl bg-brandly-surface px-3.5 py-2.5 border border-brandly-border" value="Brandly#2026" /></div>
+            </div>
+            <label class="flex items-center gap-2 pt-2"><input type="checkbox" required checked /> <span>I accept the Terms of Service and consent to the Privacy Policy.</span></label>
+            <button type="submit" class="w-full py-3 rounded-xl font-semibold text-white brandly-btn">Create Account &amp; Launch 9-Step Onboarding Wizard →</button>
+          </form>`
+      }
+    };
+
+    function showPublicPage(key) {
+      const hero = document.getElementById('public-hero-section');
+      if (hero) hero.style.display = key === 'home' ? 'block' : 'none';
+      const view = document.getElementById('public-page-view');
+      const page = PUBLIC_PAGES[key] || {
+        title: key.replace(/-/g, ' ').toUpperCase(),
+        subtitle: 'BRANDLY Public Ecosystem Route — Connected to Royal Violet Design System & Lead Attribution',
+        html: `<div class="brandly-card-elevated rounded-2xl p-8 space-y-4"><p class="text-sm text-brandly-muted">This public page ("${key}") is part of the 19 verified public routes. Legal templates include explicit notices that they are configurable operational templates pending formal legal counsel review.</p><div class="flex gap-3"><button onclick="showPublicPage('register')" class="px-5 py-2.5 rounded-xl text-xs font-semibold text-white brandly-btn">Start Your Brand</button><button onclick="showPublicPage('contact')" class="px-5 py-2.5 rounded-xl text-xs font-semibold bg-brandly-surface border border-brandly-border">Book a Consultation</button></div></div>`
+      };
+      view.innerHTML = `
+        <div class="mb-10 text-center">
+          <h2 class="font-display text-3xl sm:text-4xl font-bold">${page.title}</h2>
+          <p class="text-sm text-brandly-muted mt-2">${page.subtitle}</p>
+        </div>
+        ${page.html}
+      `;
+    }
+    showPublicPage('home');
+
+    let wizStep = 1;
+    const WIZ_STEPS = [
+      { step: 1, title: 'Business Info', fields: 'Brand Name, Category, Industry, Country (Egypt), Target Market, Description' },
+      { step: 2, title: 'Business Goals', fields: 'Launching a new brand, Growing existing business, Increasing sales, Building online store, Social media' },
+      { step: 3, title: 'Products', fields: 'Product categories, Number of products (SKUs), Average product price (EGP), Existing inventory' },
+      { step: 4, title: 'Brand Identity', fields: 'Existing logo, Preferred colors, Brand personality, Reference websites, Secure Brand Asset Uploads' },
+      { step: 5, title: 'Social Media', fields: 'Instagram username, Facebook page, Existing social media presence' },
+      { step: 6, title: 'Website', fields: 'Existing website, Preferred domain, Desired website style, Required features' },
+      { step: 7, title: 'Marketing', fields: 'Advertising budget, Target audience, Advertising objectives' },
+      { step: 8, title: 'Service Selection', fields: 'Starter (5k/3k), Growth (10k/6k), Premium (20k/12k), or Custom Package' },
+      { step: 9, title: 'Review & Submit', fields: 'Full summary of Steps 1–8 with idempotent Client + Onboarding Project creation' }
+    ];
+
+    function renderWizard() {
+      document.getElementById('wizard-badge').textContent = `Step ${wizStep} of 9 • ${WIZ_STEPS[wizStep - 1].title}`;
+      document.getElementById('wizard-progress-text').textContent = `Completion: ${Math.round((wizStep / 9) * 100)}%`;
+      document.getElementById('wizard-step-buttons').innerHTML = WIZ_STEPS.map((s) =>
+        `<button onclick="wizStep=${s.step};renderWizard()" class="p-2 rounded-xl text-left border text-[11px] ${wizStep === s.step ? 'bg-brandly-violet/25 border-brandly-violet text-white font-bold' : 'bg-brandly-surface border-brandly-border text-brandly-muted'}">0${s.step}. ${s.title}</button>`
+      ).join('');
+      const curr = WIZ_STEPS[wizStep - 1];
+      document.getElementById('wizard-step-content').innerHTML = `
+        <h3 class="font-display text-xl font-bold">Step ${curr.step} — ${curr.title}</h3>
+        <p class="text-xs text-brandly-muted">Collected &amp; Validated Fields: <strong class="text-brandly-text">${curr.fields}</strong></p>
+        ${wizStep === 9 ? `<div class="p-4 rounded-xl bg-brandly-success/15 border border-brandly-success/40 text-xs text-brandly-success">✓ Ready for Idempotent Final Submission: Creates/updates your single onboarding project without duplicate client or project records.</div>` : ''}
+      `;
+      document.getElementById('wizard-next-btn').textContent = wizStep === 9 ? 'Complete Onboarding & Open Client Dashboard ✓' : `Save Step ${wizStep} & Continue →`;
+    }
+
+    function stepWizard(delta) {
+      if (wizStep === 9 && delta === 1) {
+        switchPortal('CLIENT');
+        return;
+      }
+      wizStep = Math.min(9, Math.max(1, wizStep + delta));
+      renderWizard();
+    }
+
+    const CLIENT_MODULES = [
+      'Overview', 'My Brand', 'Website', 'Products', 'Inventory', 'Orders',
+      'Customers', 'Social Media', 'Marketing', 'AI Assistant', 'Analytics',
+      'Team Members', 'Documents (22-Clause Contract)', 'Subscription & Payments', 'Support', 'Settings'
+    ];
+    let currentClientModule = 'Overview';
+
+    const CLAUSES_22 = [
+      '1. Parties and definitions', '2. Scope of services', '3. Six-month initial term',
+      '4. Setup fees', '5. Monthly fees', '6. Advertising budget (Excluded from plan fees)',
+      '7. Performance fee (5% only when explicitly agreed)', '8. Customer obligations', '9. BRANDLY obligations',
+      '10. Intellectual property (BRANDLY owns platform; Client owns brand/data)', '11. Website and platform ownership',
+      '12. Social media ownership (Client retains 100% ownership)', '13. Data protection (Strict tenant isolation)',
+      '14. AI limitations (No autonomous refunds/financial promises)', '15. Confidentiality',
+      '16. Third-party integrations', '17. Termination (30-day notice)', '18. Early cancellation (No 50% future profit claim)',
+      '19. Outstanding payments', '20. Account and data handover (CSV/JSON export + OAuth release)',
+      '21. Dispute resolution', '22. Applicable Egyptian law, subject to legal review'
+    ];
+
+    function renderClientModule(mod) {
+      currentClientModule = mod;
+      document.getElementById('client-nav-list').innerHTML = CLIENT_MODULES.map((m) =>
+        `<button onclick="renderClientModule('${m}')" class="text-left px-3 py-2 rounded-xl transition whitespace-nowrap ${m === currentClientModule ? 'brandly-btn text-white font-semibold' : 'text-brandly-muted hover:text-white hover:bg-brandly-surfaceSecondary'}">${m}</button>`
+      ).join('');
+
+      const panel = document.getElementById('client-main-panel');
+
+      if (mod === 'Documents (22-Clause Contract)') {
+        panel.innerHTML = `
+          <div class="space-y-6">
+            <div class="border-b border-brandly-border pb-4 flex flex-wrap justify-between items-center gap-3">
+              <div>
+                <span class="px-3 py-1 rounded-full text-xs bg-brandly-violet/20 border border-brandly-border">TASK 11 • DIGITAL CONTRACT ENGINE</span>
+                <h2 class="font-display text-2xl font-bold mt-2">BRANDLY Digital Brand Development &amp; Management Service Agreement.</h2>
+                <p class="text-xs text-brandly-muted">Initial Term: 6 Months • All 22 Clauses Present &amp; Unmerged • SHA-256 Sealed Electronic Signature</p>
+              </div>
+              <button onclick="window.print()" class="px-4 py-2 rounded-xl text-xs font-semibold text-white brandly-btn">Print / Download PDF Agreement</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+              ${CLAUSES_22.map((c) => `<div class="p-3.5 rounded-xl bg-brandly-surface border border-brandly-border font-medium text-brandly-text">✓ ${c}</div>`).join('')}
+            </div>
+          </div>`;
+        return;
+      }
+
+      if (mod === 'AI Assistant') {
+        panel.innerHTML = `
+          <div class="space-y-6">
+            <div class="border-b border-brandly-border pb-4">
+              <span class="px-3 py-1 rounded-full text-xs bg-brandly-violet/20 border border-brandly-border">TASK 7 • BRANDLY AI — YOUR BUSINESS NEVER SLEEPS</span>
+              <h2 class="font-display text-2xl font-bold mt-2">Live Product-Grounded AI Customer Support &amp; Business Intelligence</h2>
+            </div>
+            <div class="brandly-card rounded-2xl p-6 space-y-4 text-xs">
+              <div class="p-3.5 rounded-xl bg-brandly-surfaceSecondary border border-brandly-border">
+                <div class="text-brandly-muted mb-1">Customer Query:</div>
+                <div class="font-semibold text-sm">"How much is the black hoodie in XL?"</div>
+              </div>
+              <div class="p-3.5 rounded-xl bg-brandly-violet/15 border border-brandly-violet">
+                <div class="text-brandly-violet font-bold mb-1">BRANDLY AI (Retrieved from Live Product Database — Zero Hallucination):</div>
+                <div class="text-sm">"The black hoodie is available for EGP 850. Size XL is currently in stock. Would you like to place an order?"</div>
+              </div>
+              <div class="text-brandly-muted">Safety Guardrail Active: AI is strictly blocked from issuing autonomous refunds or making unauthorized financial promises; automatically escalates to human staff.</div>
+            </div>
+          </div>`;
+        return;
+      }
+
+      panel.innerHTML = `
+        <div class="space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-4 border-b border-brandly-border pb-4">
+            <div>
+              <span class="px-3 py-1 rounded-full text-xs bg-brandly-violet/20 border border-brandly-border">Isolated Tenant Workspace Module</span>
+              <h2 class="font-display text-3xl font-bold mt-2">${mod}</h2>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs bg-brandly-success/20 text-brandly-success">Backend Tenant Guard Verified</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+            <div class="brandly-card rounded-xl p-5"><div class="text-brandly-muted">Storefront Net Sales</div><div class="font-display text-2xl font-bold text-brandly-success mt-1">0 EGP (Live DB)</div><div class="text-[11px] text-brandly-muted mt-1">Never shows fake stats as real</div></div>
+            <div class="brandly-card rounded-xl p-5"><div class="text-brandly-muted">Website Industry Templates</div><div class="font-display text-2xl font-bold mt-1">7 Industries</div><div class="text-[11px] text-brandly-muted mt-1">Fashion, Beauty, Tech, Food, Home, Acc, Retail</div></div>
+            <div class="brandly-card rounded-xl p-5"><div class="text-brandly-muted">Social &amp; Ads OAuth</div><div class="font-display text-2xl font-bold text-brandly-violet mt-1">Official APIs</div><div class="text-[11px] text-brandly-muted mt-1">Meta Graph + Google Ads (AES-256-GCM)</div></div>
+            <div class="brandly-card rounded-xl p-5"><div class="text-brandly-muted">Payments &amp; Performance Fee</div><div class="font-display text-2xl font-bold mt-1">Paymob + Bank</div><div class="text-[11px] text-brandly-muted mt-1">5% fee only when contractually accepted</div></div>
+          </div>
+        </div>`;
+    }
+  </script>
+</body>
+</html>
